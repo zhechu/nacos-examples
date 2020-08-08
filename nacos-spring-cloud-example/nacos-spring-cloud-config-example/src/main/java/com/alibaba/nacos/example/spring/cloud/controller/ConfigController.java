@@ -1,6 +1,7 @@
 package com.alibaba.nacos.example.spring.cloud.controller;
 
 import com.alibaba.nacos.example.spring.cloud.config.UserProperties;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -14,6 +15,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/config")
 @RefreshScope
+@Slf4j
 public class ConfigController {
 
     @Value("${user.name}")
@@ -36,6 +38,9 @@ public class ConfigController {
         map.put("name", userProperties.getName());
         map.put("age", userProperties.getAge());
         map.put("logLevel", logLevel);
+
+        log.info("get all:{}", map);
+
         return map;
     }
 
